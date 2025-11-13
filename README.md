@@ -44,6 +44,10 @@ Before you begin:
 - ✅ ID tokens  
 5. Copy the **Application (client) ID** — you’ll need it later.
 
+![Canvas Authentication Flow](./images/webappauth.PNG)
+
+![Second Canvas Authentication Flow](./images/webappauth2.PNG)
+
 ---
 
 ## 🔑 Step 2: Define a Custom Scope & Trust Relationship
@@ -57,6 +61,8 @@ Before you begin:
 3. Save the scope.  
 4. Under **Expose an API → Add a client application**, paste the **Canvas App’s Client ID** to create a trusted relationship.  
 
+![Custom Scope Config](./images/exposeapiconfig.PNG)
+
 ---
 
 ## 🪄 Step 3: Configure Manual Authentication in Copilot Studio
@@ -68,13 +74,18 @@ Before you begin:
 
 | Field | Description |
 |--------|-------------|
-| **Service Provider** | Microsoft Entra ID v2 / Azure AD v2 |
+| **Service Provider** | Microsoft Entra ID v2 with client secrets / Azure AD v2 |
 | **Client ID** | Authentication App’s Client ID |
 | **Client Secret** | Secret created earlier |
-| **Scopes** | Custom scope (e.g. `api://<Auth-App-ID>/MyCopilotScope`) |
-| **Token Exchange URL** | Same as the custom scope URI |
+| **Token Exchange URL** |  custom scope URI (e.g. `api://<Auth-App-ID>/MyCopilotScope`)|
+| **Scopes** | Custom scope (e.g openid, offline) |
+
 
 5. Click **Save**, then **Publish** your Copilot to apply the changes.
+
+![Copilot Studio Authentication Setting](./images/copilotstudiosetting.PNG)
+
+![Copilot Studio Authentication Setting](./images/copilotstudiosetting2.PNG)
 
 ---
 
