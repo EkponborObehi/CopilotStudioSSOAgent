@@ -28,6 +28,8 @@ Before you begin:
 - ✅ Access tokens  
 - ✅ ID tokens  
 7. In **Certificates & secrets → New client secret**, generate and securely copy the secret value.  
+![Authentication Flow](./images/copilotap.PNG)
+![Second Authentication Flow](./images/copilotap2.PNG)
 
 ### 2️⃣ Canvas App Registration
 1. Create another app registration, e.g. `MyCopilot-CanvasApp`.  
@@ -78,8 +80,9 @@ Before you begin:
 
 After setup:
 
-- Launch your Copilot via your custom canvas web page.  
-- If SSO is correctly configured:
+- Launch your Copilot via your custom canvas web page (index.html).
+- The authentication logic is already implemented in the page — you only need to replace the placeholder values (e.g. clientId, tenantId, and redirectUri) where comments indicate in the code.
+- Once updated, publish and test.
 - Users **won’t be prompted** to sign in again if they’re already signed in.  
 - If you see a login prompt or validation-code popup:
 - Recheck the **scope**, **redirect URIs**, and **token exchange URL** configuration.
@@ -89,8 +92,7 @@ After setup:
 ## ⚠️ Notes & Tips
 
 - Use **two separate app registrations** — one for authentication and one for the canvas.  
-- Redirect URIs must **exactly** match (including trailing slashes).  
-- Request **only minimal scopes** needed by your Copilot.  
+- Redirect URIs must **exactly** match (including trailing slashes).    
 - Re-publish your agent anytime you change authentication settings.  
 
 ---

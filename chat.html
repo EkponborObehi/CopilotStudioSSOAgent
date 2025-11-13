@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
+<script src="config.js"></script>
 <script type="text/javascript">
 if (typeof msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.32.0/js/msal-browser.min.js' type='text/javascript' %3E%3C/script%3E"));
 </script>
@@ -58,7 +59,7 @@ display: none;
 <body>
 <div id="chatwindow">
 <div id="header">
-ZIDA Web Chat
+Copilot Web Chat
 </div>
 <div id="subheader">
 <span id="loginStatus">You are not logged in on the website.</span>
@@ -70,15 +71,15 @@ ZIDA Web Chat
 <script>
 // TODO Change parameters below to your client id, tenant id and token endpoint.
 // See documentation (https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-sso?tabs=webApp)
-const clientId = "a1e38d29-55f5-4110-af53-dfb1aa56c6e1"
-const tenantId = "a04a5b96-5d86-4d00-b35b-bc7e2a22f7dd"
-const tokenEndpoint = "https://fcced93a5eb5e69b8c70fd6a9cb6ca.46.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cre0e_agent/directline/token?api-version=2022-03-01-preview" // you can find the token URL via the mobile app channel configuration // you can find the token URL via the Mobile app channel configuration
+const clientId = CONFIG.clientId;
+const tenantId = CONFIG.tenantId;
+const tokenEndpoint = CONFIG.tokenEndpoint;
+
 // Config object to be passed to Msal on creation
 const msalConfig = {
 auth: {
-clientId: clientId,
-authority: "https://login.microsoftonline.com/a04a5b96-5d86-4d00-b35b-bc7e2a22f7dd"
-},
+clientId: clientId,  // 👈 Must match your Canvas App Client ID
+authority: `https://login.microsoftonline.com/${tenantId}`}, // 👈 Must match your Azure AD tenant
 cache: {
 cacheLocation: "sessionStorage", // This configures where your cache will be stored
 storeAuthStateInCookie: false, // Set this to 'true' if you are having issues on IE11 or Edge
@@ -86,7 +87,7 @@ storeAuthStateInCookie: false, // Set this to 'true' if you are having issues on
 };
 // Add here scopes for id token to be used at MS Identity Platform endpoints.
 const loginRequest = {
-scopes: ["api://bd7f746d-48d6-4a75-a59a-02e1a3b7d90b/access_as_user"]
+scopes: CONFIG.customScope // 👈 Replace with your custom scope name
 };
 
 const msalInstance = new msal.PublicClientApplication(msalConfig);
