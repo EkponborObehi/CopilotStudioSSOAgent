@@ -129,9 +129,9 @@
           } else return next(action);
         } else return next(action);
       });
-
-          const styleOptions = 
-{
+//custom styling on the chat widget
+    const styleOptions = 
+    {
     "accent":"#909da7",
     "autoScrollSnapOnPage":true,
     "autoScrollSnapOnPageOffset":0,
@@ -193,11 +193,9 @@
     "suggestedActionTextColor":"#FFFFFFFF",
     "typingAnimationDuration":5000,"typingAnimationHeight":20,
     "typingAnimationWidth":64,
-    "userAvatarBackgroundColor":"#222222",
-    "userAvatarImage":"https://avatars.githubusercontent.com/u/8174072?v=4&size=64",
+    "userAvatarBackgroundColor":"#FFFFF",
+    "userAvatarImage": 'https://img.icons8.com/?size=100&id=98957&format=png&color=0078d4',
     "userAvatarInitials":"U"};
-
-
       window.WebChat.renderWebChat({ directLine, store, userID, styleOptions }, document.getElementById('webchat'));
     }
 
