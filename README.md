@@ -28,7 +28,9 @@ Before you begin:
 - ✅ Access tokens  
 - ✅ ID tokens  
 7. In **Certificates & secrets → New client secret**, generate and securely copy the secret value.  
+
 ![Authentication Flow](./images/copilotap.PNG)
+
 ![Second Authentication Flow](./images/copilotap2.PNG)
 
 ### 2️⃣ Canvas App Registration
