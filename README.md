@@ -96,9 +96,6 @@ After setup:
 - Launch your Copilot via your custom canvas web page (index.html).
 - The authentication logic is already implemented in the page — you only need to replace the placeholder values (e.g. clientId, tenantId, and redirectUri) where comments indicate in the code.
 - Once updated, publish and test.
-- Users **won’t be prompted** to sign in again if they’re already signed in.  
-- If you see a login prompt or validation-code popup:
-- Recheck the **scope**, **redirect URIs**, and **token exchange URL** configuration.
 
 ---
 
