@@ -1,0 +1,88 @@
+/* Global styles */
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background-color: #f9fafb; /* page background */
+      display: flex;
+      flex-direction: column;
+    }
+
+    #chatwindow {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+    }
+
+    /* Header - light theme */
+    #header {
+      background-color: #ffffff;
+      color: #111827;
+      font-weight: 600;
+      font-size: 16px;
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #e5e7eb;
+      border-radius: 0 0 12px 12px;
+    }
+
+    /* Subheader/footer - light theme */
+    #subheader {
+      background-color: #f3f4f6;
+      color: #374151;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    #subheader a {
+      color: #0078d4; /* accent blue */
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 12px;
+      font-size: 13px;
+    }
+
+    #subheader a:hover {
+      text-decoration: underline;
+    }
+
+    /* WebChat container */
+    #webchat {
+      flex: 1;
+      overflow: hidden;
+      background-color: #ffffff; /* consistent chat background */
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 16px;
+    }
+    .webchat__stack {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* Fade-in for loading messages */
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
