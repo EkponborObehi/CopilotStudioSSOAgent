@@ -2,16 +2,14 @@
 This is a custom Copilot Studio agent with Single Sign-On (SSO) built using HTML, CSS, and JavaScript.
 It's integrated with different data sources including a SharePoint library.
 
-Live demo:   ```
- https://example-demo-link.com
-  ```
+Live demo:   ``` https://example-demo-link.com ```
 
 Test credentials:
 
 | **Username** | ``` testuser@example.com ``` |
 | **Password** | ``` Test1234!``` |
 
-
+---
 # 🧩 Single Sign-On (SSO) Setup for Copilot Studio — Manual Authentication
 
 This guide explains how to configure **manual authentication (SSO)** for your Microsoft Copilot Studio agent.  
