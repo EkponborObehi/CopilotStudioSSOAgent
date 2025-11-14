@@ -1,3 +1,4 @@
+// Initializes the MSAL configuration with client and tenant IDs.
 const clientId = CONFIG.clientId; //Replace with your Canvas(web) App's Client ID
 const tenantId = CONFIG.tenantId; //Replace with your Azure AD Tenant ID
 const tokenEndpoint = CONFIG.tokenEndpoint; // Replace with Token endpoint to fetch Direct Line token
@@ -7,15 +8,17 @@ const msalConfig = {
   cache: { cacheLocation: "sessionStorage", storeAuthStateInCookie: false }
 };
 
+// Request for login with specified scopes.
 const loginRequest = { scopes: [CONFIG.customScope] }; //Replace with your custom scope name
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 let user = null;
 
+// Handles the sign-in process when the sign-in button is clicked.
 async function onSignInClick() {
   try { await msalInstance.loginPopup(loginRequest); } 
   catch (err) { console.log(err); }
 
-  const accounts = msalInstance.getAllAccounts();
+ const accounts = msalInstance.getAllAccounts();
   if (accounts.length > 0) {
     msalInstance.setActiveAccount(accounts[0]);
     user = accounts[0];
@@ -25,13 +28,13 @@ async function onSignInClick() {
     await renderChatWidget();
   }
 }
-
+// Handles the sign-out process when the logout button is clicked.
 async function onSignOutClick() {
   await msalInstance.logoutPopup({ account: user });
   location.reload();
   
 }
-
+// Extracts the OAuth card resource URI from the activity.
 function getOAuthCardResourceUri(activity) {
   if (activity && activity.attachments && activity.attachments[0] &&
       activity.attachments[0].contentType === 'application/vnd.microsoft.card.oauth' &&
@@ -40,6 +43,7 @@ function getOAuthCardResourceUri(activity) {
   }
 }
 
+// Exchanges the token asynchronously using the resource URI.
 async function exchangeTokenAsync(resourceUri) {
   let user = msalInstance.getAllAccounts();
   if (user.length <= 0) return null;
@@ -48,12 +52,14 @@ async function exchangeTokenAsync(resourceUri) {
   catch (err) { console.log(err); return null; }
 }
 
+// Fetches JSON data from a given URL with optional options.
 async function fetchJSON(url, options = {}) {
   const res = await fetch(url, { ...options, headers: { ...options.headers, accept: 'application/json' }});
   if (!res.ok) throw new Error(`Failed to fetch JSON due to ${res.status}`);
   return await res.json();
 }
 
+// Renders the chat widget and manages the chat interactions.
 async function renderChatWidget() {
   var userID = user?.localAccountId ? user.localAccountId.substr(0,36) : (Math.random().toString() + Date.now().toString()).substr(0,64);
   const { token } = await fetchJSON(tokenEndpoint);
@@ -94,6 +100,7 @@ async function renderChatWidget() {
     } else return next(action);
   });
 
+  // Configuration for the chat widget's appearance and behavior.
   const styleOptions = {
     "hideSigninButton": true,
     "accent":"#909da7",
@@ -102,7 +109,7 @@ async function renderChatWidget() {
     "avatarBorderRadius":"7%",
     "avatarSize":31,
     "botAvatarBackgroundColor":"#ffffff00",
-    "botAvatarImage":"images/logo.png",
+    "botAvatarImage":"assets/images/logo.png",
     "botAvatarInitials":"B",
     "bubbleAttachmentMaxWidth":480,
     "bubbleAttachmentMinWidth":250,
@@ -163,9 +170,11 @@ async function renderChatWidget() {
     "userAvatarInitials":"U"
   };
 
-  window.WebChat.renderWebChat({ directLine, store, userID, styleOptions }, document.getElementById('webchat'));
+// Renders the chat widget into the specified DOM element.
+window.WebChat.renderWebChat({ directLine, store, userID, styleOptions }, document.getElementById('webchat'));
 }
 
+// Initializes the chat by checking for existing user accounts and setting the UI accordingly.
 function initializeChat() {
   const accounts = msalInstance.getAllAccounts();
   if (accounts.length > 0) {
@@ -177,6 +186,7 @@ function initializeChat() {
   }
 }
 
+// Immediately invokes the initialization and rendering of the chat widget.
 (async () => {
   initializeChat();
   await renderChatWidget();

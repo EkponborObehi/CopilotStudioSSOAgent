@@ -1,5 +1,16 @@
 # CopilotStudioSSOAgent
-This is a custom copilot studio agent with SSO enabled written with Basic HTML, CSS & Javascript
+This is a custom Copilot Studio agent with Single Sign-On (SSO) built using HTML, CSS, and JavaScript.
+It's integrated with different data sources including a SharePoint library.
+
+Live demo:   ```
+ https://example-demo-link.com
+  ```
+
+Test credentials:
+
+| **Username** | ``` testuser@example.com ``` |
+| **Password** | ``` Test1234!``` |
+
 
 # 🧩 Single Sign-On (SSO) Setup for Copilot Studio — Manual Authentication
 
@@ -30,9 +41,9 @@ Before you begin:
 - ✅ ID tokens  
 7. In **Certificates & secrets → New client secret**, generate and securely copy the secret value.  
 
-![Authentication Flow](./images/copilotap.PNG)
+![Authentication Flow](./assets/images/copilotap.PNG)
 
-![Second Authentication Flow](./images/copilotap2.PNG)
+![Second Authentication Flow](./assets/images/copilotap2.PNG)
 
 ### 2️⃣ Canvas App Registration
 1. Create another app registration, e.g. `MyCopilot-CanvasApp`.  
@@ -45,9 +56,9 @@ Before you begin:
 - ✅ ID tokens  
 5. Copy the **Application (client) ID** — you’ll need it later.
 
-![Canvas Authentication Flow](./images/webappauth.PNG)
+![Canvas Authentication Flow](./assets/images/webappauth.PNG)
 
-![Second Canvas Authentication Flow](./images/webappauth2.PNG)
+![Second Canvas Authentication Flow](./assets/images/webappauth2.PNG)
 
 ---
 
@@ -62,7 +73,7 @@ Before you begin:
 3. Save the scope.  
 4. Under **Expose an API → Add a client application**, paste the **Canvas App’s Client ID** to create a trusted relationship.  
 
-![Custom Scope Config](./images/exposeapiconfig.PNG)
+![Custom Scope Config](./assets/images/exposeapiconfig.PNG)
 
 ---
 
@@ -84,9 +95,9 @@ Before you begin:
 
 5. Click **Save**, then **Publish** your Copilot to apply the changes.
 
-![Copilot Studio Authentication Setting](./images/copilotstudiosetting.PNG)
+![Copilot Studio Authentication Setting](./assets/images/copilotstudiosetting.PNG)
 
-![Copilot Studio Authentication Setting](./images/copilotstudiosetting2.PNG)
+![Copilot Studio Authentication Setting](./assets/images/copilotstudiosetting2.PNG)
 
 ---
 
