@@ -1,7 +1,7 @@
 // Initializes the MSAL configuration with client and tenant IDs.
-const clientId = CONFIG.clientId; //Replace with your Canvas(web) App's Client ID
-const tenantId = CONFIG.tenantId; //Replace with your Azure AD Tenant ID
-const tokenEndpoint = CONFIG.tokenEndpoint; // Replace with Token endpoint to fetch Direct Line token
+const clientId = config.clientId; //Replace with your Canvas(web) App's Client ID
+const tenantId = config.tenantId; //Replace with your Azure AD Tenant ID
+const tokenEndpoint = config.tokenEndpoint; // Replace with Token endpoint to fetch Direct Line token
 
 const msalConfig = {
   auth: { clientId, authority: `https://login.microsoftonline.com/${tenantId}` },
@@ -9,7 +9,7 @@ const msalConfig = {
 };
 
 // Request for login with specified scopes.
-const loginRequest = { scopes: [CONFIG.customScope] }; //Replace with your custom scope name
+const loginRequest = { scopes: [config.customScope] }; //Replace with your custom scope name
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 let user = null;
 
