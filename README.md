@@ -5,7 +5,7 @@ It's integrated with different data sources including a SharePoint library.
 You can access the **live demo** with the link below and log in using the test credentials:
 
 **Live demo:**  
-https://example-demo-link.com
+https://copilotssoagent.netlify.app
 
 
 **Test credentials:**
