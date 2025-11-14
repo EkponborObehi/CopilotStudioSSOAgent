@@ -1,0 +1,6 @@
+window.ENV = {
+  CLIENTID:"",
+  TENANTID:"",
+  TOKENENDPOINT:"",
+  CUSTOMSCOPE:""
+};
