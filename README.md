@@ -1,5 +1,6 @@
 # CopilotStudioSSOAgent
-This is a custom copilot studio agent with SSO enabled
+This is a custom copilot studio agent with SSO enabled written with Basic HTML, CSS & Javascript
+
 # 🧩 Single Sign-On (SSO) Setup for Copilot Studio — Manual Authentication
 
 This guide explains how to configure **manual authentication (SSO)** for your Microsoft Copilot Studio agent.  
