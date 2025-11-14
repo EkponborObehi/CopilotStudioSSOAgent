@@ -1,2 +1,4 @@
 # Sensitive configuration files
+/assets/js/env.js
+/assets/js/config.js
 netlify.toml
