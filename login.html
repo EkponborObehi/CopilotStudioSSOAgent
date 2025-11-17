@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Copilot Web Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://alcdn.msauth.net/browser/2.32.0/js/msal-browser.min.js"></script>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Copilot Web Chat</h1>
+      <p>Signing you in with Microsoft...</p>
+      <div class="spinner"></div>
+      <div class="status-message" id="statusMessage">Please wait...</div>
+    </div>
+  </div>
+
+  <script>
+    const clientId = config.clientId; // Application (client) ID
+    const tenantId = config.tenantId; // Directory (tenant) ID
+
+    const msalConfig = {
+      auth: { 
+        clientId, 
+        authority: `https://login.microsoftonline.com/${tenantId}`,
+        redirectUri: window.location.origin + "/login.html"
+      },
+      cache: { cacheLocation: "localStorage", storeAuthStateInCookie: false }
+    };
+
+    const loginRequest = { scopes: [config.customScope] };
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+    async function handleLogin() {
+      await msalInstance.initialize();
+      
+      const statusMessage = document.getElementById('statusMessage');
+
+      try {
+        // Check if returning from redirect
+        const response = await msalInstance.handleRedirectPromise();
+        
+        if (response && response.account) {
+          // Successfully logged in
+          console.log("Login successful:", response.account);
+          statusMessage.textContent = "Login successful! Redirecting to chat...";
+          msalInstance.setActiveAccount(response.account);
+          
+          // Redirect to main chat page
+          setTimeout(() => {
+            window.location.href = "/index.html";
+          }, 1000);
+          return;
+        }
+
+        // Check if already logged in
+        const accounts = msalInstance.getAllAccounts();
+        if (accounts.length > 0) {
+          console.log("Already logged in:", accounts[0]);
+          statusMessage.textContent = "Already logged in! Redirecting...";
+          msalInstance.setActiveAccount(accounts[0]);
+          
+          // Redirect to main chat page
+          setTimeout(() => {
+            window.location.href = "/index.html";
+          }, 1000);
+          return;
+        }
+
+        // Not logged in, initiate login redirect
+        statusMessage.textContent = "Redirecting to Microsoft login...";
+        await msalInstance.loginRedirect(loginRequest);
+        
+      } catch (error) {
+        console.error("Login error:", error);
+        statusMessage.textContent = "Login failed. Please refresh the page to try again.";
+        statusMessage.style.color = "red";
+      }
+    }
+
+    // Start the login process
+    handleLogin();
+  </script>
+</body>
+</html>

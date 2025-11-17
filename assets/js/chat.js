@@ -1,39 +1,57 @@
 // Initializes the MSAL configuration with client and tenant IDs.
-const clientId = config.clientId; //Replace with your Canvas(web) App's Client ID
-const tenantId = config.tenantId; //Replace with your Azure AD Tenant ID
-const tokenEndpoint = config.tokenEndpoint; // Replace with Token endpoint to fetch Direct Line token
+const clientId = config.clientId; // Application (client) ID
+const tenantId = config.tenantId; // Directory (tenant) ID
+const tokenEndpoint = config.tokenEndpoint; // Endpoint to fetch Direct Line token
 
 const msalConfig = {
-  auth: { clientId, authority: `https://login.microsoftonline.com/${tenantId}` },
-  cache: { cacheLocation: "sessionStorage", storeAuthStateInCookie: false }
+  auth: { 
+    clientId, 
+    authority: `https://login.microsoftonline.com/${tenantId}`,
+    redirectUri: window.location.origin + "/login.html"
+  },
+  cache: { cacheLocation: "localStorage", storeAuthStateInCookie: false }
 };
 
-// Request for login with specified scopes.
-const loginRequest = { scopes: [config.customScope] }; //Replace with your custom scope name
+const loginRequest = { scopes: [config.customScope] };
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 let user = null;
 
-// Handles the sign-in process when the sign-in button is clicked.
-async function onSignInClick() {
-  try { await msalInstance.loginPopup(loginRequest); } 
-  catch (err) { console.log(err); }
-
- const accounts = msalInstance.getAllAccounts();
-  if (accounts.length > 0) {
-    msalInstance.setActiveAccount(accounts[0]);
-    user = accounts[0];
-    document.getElementById("loginStatus").innerHTML = "Currently logged in as " + user.name + " on the website.";
-    document.getElementById("login").style.display = "none";
-    document.getElementById("logout").style.display = "inline";
-    await renderChatWidget();
+// Redirect to login page if not authenticated
+async function checkAuthentication() {
+  await msalInstance.initialize();
+  
+  const accounts = msalInstance.getAllAccounts();
+  
+  if (accounts.length === 0) {
+    // No user logged in, redirect to login page
+    console.log("No user authenticated, redirecting to login page...");
+    window.location.href = "/login.html";
+    return false;
   }
+  
+  // User is authenticated
+  user = accounts[0];
+  msalInstance.setActiveAccount(user);
+  console.log("User authenticated:", user);
+  return true;
 }
+
 // Handles the sign-out process when the logout button is clicked.
 async function onSignOutClick() {
-  await msalInstance.logoutPopup({ account: user });
-  location.reload();
-  
+  const logoutRequest = {
+    account: user,
+    postLogoutRedirectUri: window.location.origin + "/login.html"
+  };
+  await msalInstance.logoutRedirect(logoutRequest);
 }
+
+// Updates UI elements to reflect logged-in state
+function updateUIForLoggedInUser() {
+  document.getElementById("loginStatus").innerHTML = "Currently logged in as " + user.name + " on the website.";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("logout").style.display = "inline";
+}
+
 // Extracts the OAuth card resource URI from the activity.
 function getOAuthCardResourceUri(activity) {
   if (activity && activity.attachments && activity.attachments[0] &&
@@ -170,24 +188,16 @@ async function renderChatWidget() {
     "userAvatarInitials":"U"
   };
 
-// Renders the chat widget into the specified DOM element.
-window.WebChat.renderWebChat({ directLine, store, userID, styleOptions }, document.getElementById('webchat'));
+  // Renders the chat widget into the specified DOM element.
+  window.WebChat.renderWebChat({ directLine, store, userID, styleOptions }, document.getElementById('webchat'));
 }
 
-// Initializes the chat by checking for existing user accounts and setting the UI accordingly.
-function initializeChat() {
-  const accounts = msalInstance.getAllAccounts();
-  if (accounts.length > 0) {
-    user = accounts[0];
-    msalInstance.setActiveAccount(user);
-    document.getElementById("loginStatus").innerHTML = "Currently logged in as " + user.name + " on the website.";
-    document.getElementById("login").style.display = "none";
-    document.getElementById("logout").style.display = "inline";
-  }
-}
-
-// Immediately invokes the initialization and rendering of the chat widget.
+// Initialize and check authentication
 (async () => {
-  initializeChat();
-  await renderChatWidget();
+  const isAuthenticated = await checkAuthentication();
+  
+  if (isAuthenticated) {
+    updateUIForLoggedInUser();
+    await renderChatWidget();
+  }
 })();

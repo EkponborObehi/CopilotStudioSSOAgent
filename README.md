@@ -109,8 +109,8 @@ Before you begin:
 
 After setup:
 
-- Launch your Copilot via your custom canvas web page (index.html).
-- The authentication logic is already implemented in the page — you only need to replace the placeholder values (e.g. clientId, tenantId, and redirectUri) where comments indicate in the code.
+- Launch your Copilot via your custom canvas web page (login.html,chat.js).
+- The authentication logic is already implemented in the page — you only need to replace the placeholder values (e.g. clientId, tenantId, and tokenendpoint) where comments indicate in the code.
 - Once updated, publish and test.
 
 ---
