@@ -12,8 +12,8 @@ https://copilotssoagent.netlify.app
 
 | Field    | Value                   |
 |----------|------------------------|
-| Username | `testuser@example.com` |
-| Password | `Test1234!`            |
+| Username | `contoso@bedevcenter.onmicrosoft.com` |
+| Password | `P@ss550rd123`            |
 
 ---
 # 🧩 Single Sign-On (SSO) Setup for Copilot Studio — Manual Authentication
@@ -36,10 +36,10 @@ Before you begin:
 
 ### 1️⃣ Authentication App Registration
 1. Go to **Azure Portal → App registrations → New registration**.  
-2. Name it (e.g. `MyCopilot-AuthApp`).  
+2. Name it (e.g. `CopilotAgentSSO (Authentication)`).  
 3. Under **Supported account types**, choose as needed (e.g. “Accounts in any organizational directory and personal Microsoft accounts”).  
 4. After creation, navigate to **Authentication → Add a platform → Web**.  
-5. Add redirect URI:  https://token.botframework.com/.auth/web/redirect
+5. Add redirect URI:  https://token.botframework.com/.auth/web/redirect (You can get the redirect url from copilot studio as shown on step 3).
 6. Under **Implicit grant and hybrid flows**, enable:
 - ✅ Access tokens  
 - ✅ ID tokens  
@@ -50,7 +50,7 @@ Before you begin:
 ![Second Authentication Flow](./assets/images/copilotap2.PNG)
 
 ### 2️⃣ Canvas App Registration
-1. Create another app registration, e.g. `MyCopilot-CanvasApp`.  
+1. Create another app registration, e.g. `CopilotAgentSSO (Canvas)`.  
 2. Under **Authentication → Add a platform**, select:
 - **Single Page Application (SPA)** if hosted as a web app  
 - **Web** if using a backend or server-rendered page.  

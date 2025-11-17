@@ -1,7 +1,7 @@
 // Initializes the MSAL configuration with client and tenant IDs.
 const clientId = config.clientId; // Application (client) ID
 const tenantId = config.tenantId; // Directory (tenant) ID
-const tokenEndpoint = config.tokenEndpoint; // Endpoint to fetch Direct Line token
+const tokenEndpoint = config.tokenEndpoint; // Direct Line token from copilot studio channel
 
 const msalConfig = {
   auth: { 
