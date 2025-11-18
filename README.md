@@ -16,14 +16,14 @@ https://copilotssoagent.netlify.app
 | Password | `P@ss550rd123`            |
 
 ---
-# 🧩 Single Sign-On (SSO) Setup for Copilot Studio — Manual Authentication
+#  Single Sign-On (SSO) Setup for Copilot Studio — Manual Authentication
 
 This guide explains how to configure **manual authentication (SSO)** for your Microsoft Copilot Studio agent.  
 Based on the instructions by official [Microsoft documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-sso).
 
 ---
 
-## 🧰 Prerequisites
+##  Prerequisites
 
 Before you begin:
 - A valid **Microsoft Entra ID (Azure AD)** tenant and admin access.  
@@ -32,7 +32,7 @@ Before you begin:
 
 ---
 
-## ⚙️ Step 1: Create Two App Registrations in Entra ID
+##  Step 1: Create Two App Registrations in Entra ID
 
 ### 1️⃣ Authentication App Registration
 1. Go to **Azure Portal → App registrations → New registration**.  
@@ -69,7 +69,7 @@ Before you begin:
 
 ---
 
-## 🔑 Step 2: Define a Custom Scope & Trust Relationship
+##  Step 2: Define a Custom Scope & Trust Relationship
 
 1. Open your **Authentication App Registration**.  
 2. Go to **Expose an API → Add a scope**.  
@@ -84,7 +84,7 @@ Before you begin:
 
 ---
 
-## 🪄 Step 3: Configure Manual Authentication in Copilot Studio
+## Step 3: Configure Manual Authentication in Copilot Studio
 
 1. In **Copilot Studio**, open your agent.  
 2. Go to **Settings → Security → Authentication**.  
@@ -108,7 +108,7 @@ Before you begin:
 
 ---
 
-## ✅ Step 4: Verification
+## Step 4: Verification
 
 After setup:
 
@@ -118,7 +118,7 @@ After setup:
 
 ---
 
-## ⚠️ Notes & Tips
+##  Notes & Tips
 
 - Use **two separate app registrations** — one for authentication and one for the canvas.  
 - Redirect URIs must **exactly** match (including trailing slashes).    
@@ -126,7 +126,7 @@ After setup:
 
 ---
 
-📘 **References**
+ **References**
 - [Neil Haddley — Configure Copilot Single Sign-On for Web](https://haddley.github.io/posts/configurecopilotsinglesignonforweb/)
 - [Microsoft Docs — Configure SSO in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-sso)
 
