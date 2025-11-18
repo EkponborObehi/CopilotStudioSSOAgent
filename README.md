@@ -12,7 +12,7 @@ https://copilotssoagent.netlify.app
 
 | Field    | Value                   |
 |----------|------------------------|
-| Username | `contoso@bedevcenter.onmicrosoft.com` |
+| Username | `adele@bedevcenter.onmicrosoft.com` |
 | Password | `P@ss550rd123`            |
 
 ---
