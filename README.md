@@ -49,7 +49,8 @@ Before you begin:
 
 ![Second Authentication Flow](./assets/images/copilotap2.PNG)
 
-**Add API Permissions**
+**Add API permissions:** Required so Copilot can obtain access tokens to read or modify data on behalf of users — e.g., Sites.Read.All or Files.Read.All for SharePoint; grant least privilege and admin consent when needed.
+
 ![API Permission](./assets/images/apipermission.PNG)
 
 ### 2️⃣ Canvas App Registration
