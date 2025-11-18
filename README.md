@@ -28,7 +28,7 @@ Based on the instructions by official [Microsoft documentation](https://learn.mi
 Before you begin:
 - A valid **Microsoft Entra ID (Azure AD)** tenant and admin access.  
 - A **custom web canvas page** where your Copilot will be embedded.  
-- Your Copilot agent should include a **Sign-in** topic or authentication trigger.  
+- Your Copilot agent should include a **Sign-in** topic.  
 
 ---
 
@@ -48,6 +48,9 @@ Before you begin:
 ![Authentication Flow](./assets/images/copilotap.PNG)
 
 ![Second Authentication Flow](./assets/images/copilotap2.PNG)
+
+**Add API Permissions**
+![API Permission](./assets/images/apipermission.PNG)
 
 ### 2️⃣ Canvas App Registration
 1. Create another app registration, e.g. `CopilotAgentSSO (Canvas)`.  
